@@ -1,11 +1,16 @@
-import express, { type Request, type Response } from 'express';
-import { sql } from '../config/database.ts';
+import { type Request, type Response } from 'express';
+import { sql } from '../services/database.ts';
+
+interface ProductInfo {
+    name: string;
+    price: number;
+    image: string;
+}
 
 export async function getProducts(req: Request, res: Response){
     try {
         const products = await sql`SELECT * FROM products ORDER BY created_at DESC`;
         
-        console.log("fetched products", products);
         res.status(200).json({success: true, data: products});
     } catch (err) {
         console.log("Error: ", err);
@@ -14,7 +19,7 @@ export async function getProducts(req: Request, res: Response){
 }
 
 export async function createProduct(req: Request, res: Response){
-    const { name, price, image } = req.body;
+    const { name, price, image }: ProductInfo = req.body;
 
     if (!name || !price || !image){
         return res.status(400).json({success: false, message: "Please provide all fields."});
@@ -53,7 +58,7 @@ export async function getProduct(req: Request, res: Response){
 
 export async function updateProduct(req: Request, res: Response){
     const { id } = req.params;
-    const { name, price, image } = req.body;
+    const { name, price, image }: ProductInfo = req.body;
 
     try {
         const updatedProducts = await sql`
