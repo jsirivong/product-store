@@ -80,8 +80,8 @@ export default function useProducts(){
 
         try {
             const response: AxiosResponse = await axios.get(`${BASE_URL}/api/products/${id}`);
-            setCurrentProduct(response.data.data);
-            setFormData(response.data.data); // pre-fill form with current product data
+            setCurrentProduct(response.data.data[0]);
+            setFormData(response.data.data[0]); // pre-fill form with current product data
             setError(null);
         } catch(err) {
             console.log("Error!: ", err);
