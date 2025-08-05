@@ -6,7 +6,7 @@ import { ArrowLeftIcon, SaveIcon, Trash2Icon } from "lucide-react";
 export default function Product() {
     const { currentProduct, formData, setFormData, loading, error, fetchProduct, updateProduct, deleteProduct } = useProducts();
     const navigate = useNavigate();
-    const { id } = useParams(); // used to fetch the id in the URL
+    const { id } = useParams(); // used to fetch the id in the URL (route parameters)
 
     useEffect(() => {
         fetchProduct(Number(id));
@@ -56,6 +56,7 @@ export default function Product() {
                         <form onSubmit={(e) => {
                             e.preventDefault();
                             updateProduct(Number(id));
+                            navigate("/");
                         }} className="space-y-6">
                             {/* Product Name */}
                             <div className="form-control">
