@@ -45,11 +45,11 @@ export async function getProduct(req: Request, res: Response){
     const { id } = req.params; 
 
     try {
-        const newProduct = await sql`
+        const product = await sql`
             SELECT * FROM products WHERE id = ${id}
-        `
+        `[0]
 
-        res.status(200).json({success: true, data: newProduct});
+        res.status(200).json({success: true, data: product});
     } catch (err){
         console.log("Error: ", err);
         res.status(500).json({success: false, message: `Unable to get product from database. ${err}`});
