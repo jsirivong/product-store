@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom"
 import { ShoppingBagIcon, ShoppingCartIcon } from 'lucide-react'
+import { Toaster } from 'react-hot-toast';
 
 export default function Navbar(){
     const { pathname } = useLocation();
@@ -9,11 +10,12 @@ export default function Navbar(){
             <div className="max-w-7xl mx-auto">
                 <div className="navbar px-4 min-h-[4rem] justify-between">
                     <div className="flex-1 lg:flex-none">
-                        <Link to={"/"} className="hover:opacity-80 transition-opacity"/>
-                        <div className="flex items-center gap-2">
-                            <ShoppingCartIcon className="size-9 text-primary"/>
-                            <span className="font-semibold font-mono tracking-widest text-2xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Product Store</span>
-                        </div>
+                        <Link to={"/"} className="hover:opacity-80 transition-opacity">
+                            <div className="flex items-center gap-2">
+                                <ShoppingCartIcon className="size-9 text-primary"/>
+                                <span className="font-semibold font-mono tracking-widest text-2xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Product Store</span>
+                            </div>
+                        </Link>
                     </div>
 
                     {/* right section*/}
@@ -29,6 +31,8 @@ export default function Navbar(){
                             </div>
                         )}
                     </div>
+
+                    <Toaster/>
                 </div>
             </div>
         </div>
